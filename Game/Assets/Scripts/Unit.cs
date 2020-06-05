@@ -24,7 +24,14 @@ public class Unit : MonoBehaviour
     public float gravity;
     public float waterInterpolationSpeed = 0.5f;
 
+    public float offsetTime;
+    public float offsetRadius;
+
     private Vector3 waterTarget;
+
+    private Vector3 offset;
+    private float offsetTimer;
+
 
     protected virtual void Start()
     {
@@ -40,6 +47,7 @@ public class Unit : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotateSpeed * Time.deltaTime);
         }
 
+        RandomOffset();
         UseWater();
     }
 
@@ -56,9 +64,7 @@ public class Unit : MonoBehaviour
 
     protected virtual void UseWater()
     {
-        waterTarget = Vector3.Slerp(waterTarget, target, waterInterpolationSpeed * Time.deltaTime);
-
-
+        waterTarget = Vector3.Slerp(waterTarget, target + offset, waterInterpolationSpeed * Time.deltaTime);
 
         Vector3 prev = waterPivot.position;
         waterRenderer.positionCount = waterVertexCount;
@@ -88,6 +94,7 @@ public class Unit : MonoBehaviour
                 if (enemy != null)
                 {
                     enemy.ReceiveDamage(damage);
+                    ApplyFireWaterFx(hit.point, Vector3.up);
                 }
                 else
                 {
@@ -99,6 +106,21 @@ public class Unit : MonoBehaviour
                 break;
             }
             prev = next;
+        }
+    }
+
+    protected virtual void RandomOffset()
+    {
+        if (offsetTimer > offsetTime)
+        {
+            offsetTimer = 0;
+            Vector2 r = Random.insideUnitCircle;
+            offset = new Vector3(r.x * offsetRadius, 0 , r.y * offsetRadius);
+
+        }
+        else
+        {
+            offsetTimer += Time.deltaTime;
         }
     }
 
