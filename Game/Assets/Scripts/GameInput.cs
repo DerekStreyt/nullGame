@@ -70,6 +70,15 @@ public class GameInput : MonoBehaviour
             unit.target = hit.point;
         }
 
+        if (Input.GetMouseButton(0))
+        {
+            unit.SetForce(1);
+        }
+        if (Input.GetMouseButton(1))
+        {
+            unit.SetForce(-1);
+        }
+
         moveDirection *= speed;
         moveDirection.y = -1;
         characterController.Move(moveDirection * Time.deltaTime);
