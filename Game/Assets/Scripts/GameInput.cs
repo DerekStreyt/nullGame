@@ -13,6 +13,7 @@ public class GameInput : MonoBehaviour
     public Camera rayCamera;
     public LayerMask mask;
     public EState state;
+    public Unit unit;
     public CharacterController characterController;
     public NavMeshAgent agent;
     public float speed = 3.5f;
@@ -59,9 +60,16 @@ public class GameInput : MonoBehaviour
     {
         agent.enabled = false;
         characterController.enabled = true;
+
+       
         moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         moveDirection.Normalize();
-        characterController.transform.LookAt(characterController.transform.position + moveDirection);
+        Ray ray = rayCamera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out var hit, 1000, mask.value))
+        {
+            unit.target = hit.point;
+        }
+
         moveDirection *= speed;
         moveDirection.y = -1;
         characterController.Move(moveDirection * Time.deltaTime);
@@ -85,7 +93,7 @@ public class GameInput : MonoBehaviour
             Vector3 direction = agent.velocity;
             direction.Normalize();
             direction.y = 0;
-            agent.transform.LookAt(agent.transform.position + direction);
+            unit.target = agent.transform.position + direction;
         }
     }
 }
