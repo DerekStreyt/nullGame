@@ -65,9 +65,13 @@ public class GameInput : MonoBehaviour
         moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         moveDirection.Normalize();
         Ray ray = rayCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out var hit, 1000, mask.value))
+        if (Physics.Raycast(ray, out var hit, 10000, mask.value))
         {
             unit.target = hit.point;
+        }
+        else
+        {
+            unit.target = unit.Position + unit.transform.forward;
         }
 
         if (Input.GetMouseButton(0))

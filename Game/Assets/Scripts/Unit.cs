@@ -8,7 +8,7 @@ public class Unit : MonoBehaviour
     public Vector3 Position => transform.position;
     public float rotateSpeed = 5;
     public Vector3 target;
-
+    public LayerMask waterMask;
 
     public float minForce = 0.5f;
     public float maxForce = 10f;
@@ -18,6 +18,9 @@ public class Unit : MonoBehaviour
     public LineRenderer waterRenderer;
     public Transform waterPivot;
     public float gravity;
+    public float waterInterpolationSpeed = 0.5f;
+
+    private Vector3 waterTarget;
 
     protected virtual void Start()
     {
@@ -38,7 +41,7 @@ public class Unit : MonoBehaviour
 
     public virtual void SetForce(float direction)
     {
-        force += direction * forceStep;
+        force += direction * forceStep * Time.deltaTime;
         force = Mathf.Clamp(force, minForce, maxForce);
     }
 
@@ -49,12 +52,14 @@ public class Unit : MonoBehaviour
 
     protected virtual void UseWater()
     {
+        waterTarget = Vector3.Slerp(waterTarget, target, waterInterpolationSpeed * Time.deltaTime);
+
         Vector3 prev = waterPivot.position;
         waterRenderer.positionCount = waterVertexCount;
         waterRenderer.SetPosition(0, prev);
         Debug.DrawRay(prev, Vector3.up, Color.green);
         Debug.DrawRay(target, Vector3.up, Color.red);
-        Vector3 direction = (target - prev);
+        Vector3 direction = (waterTarget - prev);
         direction.y = 0;
         Vector3 forceVector = direction;
         
