@@ -5,6 +5,8 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     public int waterVertexCount = 50;
+    
+    public int damage = 1;
     public Vector3 Position => transform.position;
     public float rotateSpeed = 5;
     public Vector3 target;
@@ -81,6 +83,18 @@ public class Unit : MonoBehaviour
                 Debug.DrawRay(hit.point, Vector3.right * 10, Color.red);
                 Debug.DrawRay(hit.point, Vector3.forward * 10, Color.red);
                 ApplyWaterFx(hit.point, Vector3.up);
+
+                Enemy enemy = hit.collider.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.ReceiveDamage(damage);
+                }
+                else
+                {
+                    ApplyFireWaterFx(new Vector3(1000, 0, 0), Vector3.up);
+                }
+
+
                 waterRenderer.positionCount = i + 1;
                 break;
             }
@@ -95,5 +109,14 @@ public class Unit : MonoBehaviour
         {
             position = position
         }, 1);*/
+    }
+
+    protected virtual void ApplyFireWaterFx(Vector3 position, Vector3 normal)
+    {
+        fireWaterFx.transform.position = position;
+        /*  defaultWaterFx.Emit(new ParticleSystem.EmitParams()
+          {
+              position = position
+          }, 1);*/
     }
 }
