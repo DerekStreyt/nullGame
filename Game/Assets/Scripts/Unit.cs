@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
@@ -7,6 +8,7 @@ public class Unit : MonoBehaviour
     public int waterVertexCount = 50;
     
     public int damage = 1;
+    public float maxDistance = 10;
     public Vector3 Position => transform.position;
     public float rotateSpeed = 5;
     public Vector3 target;
@@ -14,6 +16,7 @@ public class Unit : MonoBehaviour
     public ParticleSystem defaultWaterFx;
     public ParticleSystem fireWaterFx;
 
+    public float hFactor = 0.05f;
     public float minForce = 0.5f;
     public float maxForce = 10f;
     public float force = 1;
@@ -22,10 +25,10 @@ public class Unit : MonoBehaviour
     public LineRenderer waterRenderer;
     public Transform waterPivot;
     public float gravity;
-    public float waterInterpolationSpeed = 0.5f;
 
     public float offsetTime;
     public float offsetRadius;
+    public float waterMoveSpeed = 2;
 
     private Vector3 waterTarget;
 
@@ -64,24 +67,38 @@ public class Unit : MonoBehaviour
 
     protected virtual void UseWater()
     {
-        waterTarget = Vector3.Slerp(waterTarget, target + offset, waterInterpolationSpeed * Time.deltaTime);
+        Vector3 newTarget = target;
 
+        float distanceToTarget = Vector3.Distance(Position, newTarget);
+
+        if (distanceToTarget > maxDistance)
+        {
+            Vector3 dir = newTarget - Position;
+            dir.Normalize();
+            newTarget = Position + dir * maxDistance;
+            Debug.DrawRay(newTarget, Vector3.up * 10, Color.magenta);
+            distanceToTarget = maxDistance;
+        }
+
+       
+        waterTarget = Vector3.Lerp(waterTarget, newTarget + offset, waterMoveSpeed * Time.deltaTime);
+        
         Vector3 prev = waterPivot.position;
         waterRenderer.positionCount = waterVertexCount;
         waterRenderer.SetPosition(0, prev);
         Debug.DrawRay(prev, Vector3.up, Color.green);
-        Debug.DrawRay(target, Vector3.up, Color.red);
+        Debug.DrawRay(newTarget, Vector3.up, Color.red);
         Vector3 direction = (waterTarget - prev);
         direction.y = 0;
         Vector3 forceVector = direction;
         
-        float distance = Vector3.Distance(prev, target);
-        Vector3 gravityVector  = new Vector3(0, distance * 0.1f, 0); // todo
+        float distance = Vector3.Distance(prev, newTarget);
+        Vector3 gravityVector  = new Vector3(0, distance * hFactor, 0); // todo
         for (int i = 1; i < waterVertexCount; i++)
         {
             Vector3 next = prev + forceVector * (force * Time.fixedDeltaTime) + gravityVector;
             gravityVector -= Vector3.up * gravity;
-            waterRenderer.SetPosition(i, next);
+        
             Debug.DrawLine(prev, next);
             if (Physics.Linecast(prev, next, out var hit, waterMask.value))
             {
@@ -101,9 +118,13 @@ public class Unit : MonoBehaviour
                     ApplyFireWaterFx(new Vector3(1000, 0, 0), Vector3.up);
                 }
 
-
+                waterRenderer.SetPosition(i, hit.point);
                 waterRenderer.positionCount = i + 1;
                 break;
+            }
+            else
+            {
+                waterRenderer.SetPosition(i, next);
             }
             prev = next;
         }
