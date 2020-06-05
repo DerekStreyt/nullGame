@@ -49,8 +49,6 @@ public class Unit : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(lookAt);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotateSpeed * Time.deltaTime);
         }
-
-        RandomOffset();
         UseWater();
     }
 
@@ -79,8 +77,19 @@ public class Unit : MonoBehaviour
             Debug.DrawRay(newTarget, Vector3.up * 10, Color.magenta);
             distanceToTarget = maxDistance;
         }
+        if (offsetTimer > offsetTime)
+        {
+            offsetTimer = 0;
+            Vector2 r = Random.insideUnitCircle;
+            float factor = Mathf.InverseLerp(0, maxDistance, distanceToTarget);
+            float currentRadius = offsetRadius * factor;
+            offset = new Vector3(r.x * currentRadius, 0, r.y * currentRadius);
+        }
+        else
+        {
+            offsetTimer += Time.deltaTime;
+        }
 
-       
         waterTarget = Vector3.Lerp(waterTarget, newTarget + offset, waterMoveSpeed * Time.deltaTime);
         
         Vector3 prev = waterPivot.position;
@@ -127,21 +136,6 @@ public class Unit : MonoBehaviour
                 waterRenderer.SetPosition(i, next);
             }
             prev = next;
-        }
-    }
-
-    protected virtual void RandomOffset()
-    {
-        if (offsetTimer > offsetTime)
-        {
-            offsetTimer = 0;
-            Vector2 r = Random.insideUnitCircle;
-            offset = new Vector3(r.x * offsetRadius, 0 , r.y * offsetRadius);
-
-        }
-        else
-        {
-            offsetTimer += Time.deltaTime;
         }
     }
 
