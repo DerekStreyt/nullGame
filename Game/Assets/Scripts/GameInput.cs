@@ -60,7 +60,6 @@ public class GameInput : MonoBehaviour
     {
         agent.enabled = false;
         characterController.enabled = true;
-
        
         moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         moveDirection.Normalize();

@@ -9,6 +9,8 @@ public class Unit : MonoBehaviour
     public float rotateSpeed = 5;
     public Vector3 target;
     public LayerMask waterMask;
+    public ParticleSystem defaultWaterFx;
+    public ParticleSystem fireWaterFx;
 
     public float minForce = 0.5f;
     public float maxForce = 10f;
@@ -54,6 +56,8 @@ public class Unit : MonoBehaviour
     {
         waterTarget = Vector3.Slerp(waterTarget, target, waterInterpolationSpeed * Time.deltaTime);
 
+
+
         Vector3 prev = waterPivot.position;
         waterRenderer.positionCount = waterVertexCount;
         waterRenderer.SetPosition(0, prev);
@@ -71,7 +75,25 @@ public class Unit : MonoBehaviour
             gravityVector -= Vector3.up * gravity;
             waterRenderer.SetPosition(i, next);
             Debug.DrawLine(prev, next);
+            if (Physics.Linecast(prev, next, out var hit, waterMask.value))
+            {
+                Debug.DrawRay(hit.point, Vector3.up * 10, Color.red);
+                Debug.DrawRay(hit.point, Vector3.right * 10, Color.red);
+                Debug.DrawRay(hit.point, Vector3.forward * 10, Color.red);
+                ApplyWaterFx(hit.point, Vector3.up);
+                waterRenderer.positionCount = i + 1;
+                break;
+            }
             prev = next;
         }
+    }
+
+    protected virtual void ApplyWaterFx(Vector3 position, Vector3 normal)
+    {
+        defaultWaterFx.transform.position = position;
+      /*  defaultWaterFx.Emit(new ParticleSystem.EmitParams()
+        {
+            position = position
+        }, 1);*/
     }
 }
