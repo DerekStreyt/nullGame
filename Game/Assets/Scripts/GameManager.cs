@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     public Text message;
     public Panel menu;
     public UnityPoolObjectParticle coinFx;
-    
+    public DestructibleObject fireFxPrefab;
+
     public void StartGame()
     {
 
