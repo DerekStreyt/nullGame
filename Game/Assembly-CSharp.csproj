@@ -65,6 +65,10 @@
   <ItemGroup>
     <Compile Include="Assets\GridSystemFireSystem\DebugCube.cs" />
     <Compile Include="Assets\GridSystemFireSystem\Storage.cs" />
+    <Compile Include="Assets\IL3DN\Scripts\IL3DN_ChangeWalkingSound.cs" />
+    <Compile Include="Assets\IL3DN\Scripts\IL3DN_SimpleFPSController.cs" />
+    <Compile Include="Assets\IL3DN\Scripts\IL3DN_SimpleMouseLook.cs" />
+    <Compile Include="Assets\IL3DN\Scripts\IL3DN_Wind.cs" />
     <Compile Include="Assets\Scripts\AnimationByMove.cs" />
     <Compile Include="Assets\Scripts\Bonus.cs" />
     <Compile Include="Assets\Scripts\Cameras\GameCamera.cs" />
@@ -75,6 +79,7 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\HudUI.cs" />
     <Compile Include="Assets\Scripts\LevelController.cs" />
+    <Compile Include="Assets\Scripts\LoadScene.cs" />
     <Compile Include="Assets\Scripts\MessageUI.cs" />
     <Compile Include="Assets\Scripts\Panel.cs" />
     <Compile Include="Assets\Scripts\PoolManager\Pool\IPoolObject.cs" />
@@ -84,6 +89,7 @@
     <Compile Include="Assets\Scripts\PoolManager\UnityPoolObjectParticle.cs" />
     <Compile Include="Assets\Scripts\PoolManager\UnityPoolObjectParticleAndTrail.cs" />
     <Compile Include="Assets\Scripts\PoolManager\UnityPoolObjectWithTime.cs" />
+    <Compile Include="Assets\Scripts\RestartScene.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\TestFx.cs" />
     <Compile Include="Assets\Scripts\TestWater.cs" />
@@ -95,6 +101,10 @@
     <Compile Include="Assets\Scripts\Zones\ZoneBase.cs" />
     <Compile Include="Assets\Scripts\Zones\ZoneDamage.cs" />
     <Compile Include="Assets\Scripts\Zones\ZoneDamageCell.cs" />
+    <None Include="Assets\IL3DN\Shaders\IL3DN_Pine.shader" />
+    <None Include="Assets\IL3DN\Shaders\IL3DN_Branch.shader" />
+    <None Include="Assets\IL3DN\Shaders\IL3DN_Grass.shader" />
+    <None Include="Assets\IL3DN\Shaders\IL3DN_OpaqueSurface.shader" />
     <None Include="Assets\Polygonal Particles\Assets\Shaders\GradientBackgroundShader.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Unity/2019.3.15f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

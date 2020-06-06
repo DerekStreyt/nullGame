@@ -24271,7 +24271,7 @@ PrefabInstance:
     - target: {fileID: 8644716145337547819, guid: 524ff8a7b996e3043a850e9f9113f748,
         type: 3}
       propertyPath: fireIncreaseTime
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8644716145490383620, guid: 524ff8a7b996e3043a850e9f9113f748,
         type: 3}
