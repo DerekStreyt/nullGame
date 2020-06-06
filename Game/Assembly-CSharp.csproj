@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Bonus.cs" />
     <Compile Include="Assets\Scripts\Cameras\GameCamera.cs" />
     <Compile Include="Assets\Scripts\Character.cs" />
+    <Compile Include="Assets\Scripts\CheckTree.cs" />
     <Compile Include="Assets\Scripts\Civil.cs" />
     <Compile Include="Assets\Scripts\DestructibleObject.cs" />
     <Compile Include="Assets\Scripts\GameConfig.cs" />
