@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\GridSystem\DebugCube.cs" />
     <Compile Include="Assets\Scripts\AnimationByMove.cs" />
+    <Compile Include="Assets\Scripts\Bonus.cs" />
     <Compile Include="Assets\Scripts\Cameras\GameCamera.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\GameInput.cs" />

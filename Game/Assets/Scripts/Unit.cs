@@ -200,6 +200,12 @@ public class Unit : Character
                     ApplyFireWaterFx(hit.point, Vector3.up);
                 }
 
+                Rigidbody rigidbody = hit.collider.GetComponent<Rigidbody>();
+                if (rigidbody != null)
+                {
+                    rigidbody.AddForceAtPosition(direction.normalized * force, hit.point, ForceMode.Force);
+                }
+
                 waterRenderer.SetPosition(i, hit.point);
                 waterRenderer.positionCount = i + 1;
                 break;
