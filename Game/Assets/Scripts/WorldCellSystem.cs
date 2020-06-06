@@ -174,7 +174,9 @@ public class WorldCellSystem : MonoBehaviour
             Vector3 pos = CellCordsToWorldCords(c.CellWorldPos);
             GameObject cellObj = Instantiate(CellPrefab, pos, Quaternion.identity);
             cellObj.transform.SetParent(GridParent.transform);
-            CubesList[c.PositionIndex.x, c.PositionIndex.y] = cellObj.GetComponent<DebugCube>();
+            DebugCube thisCube= cellObj.GetComponent<DebugCube>();
+            thisCube.SetCell(c);
+            CubesList[c.PositionIndex.x, c.PositionIndex.y] = thisCube;
         }
     }
 

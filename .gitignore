@@ -1,3 +1,7 @@
 /Game/Temp
 /Game/Library
 *.csproj
+*.csproj
+Game/.vs/Game/v16/.suo
+*.cache
+*.cache

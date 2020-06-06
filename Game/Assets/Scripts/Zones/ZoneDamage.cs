@@ -13,7 +13,7 @@ public class ZoneDamage : ZoneBase<Character>
         {
             foreach (var character in characters)
             {
-                character.ReceiveDamage(GameConfig.Instance.damageByZone);
+                character.ReceiveDamage(GameConfig.Instance.damageByZone,Vector3.zero,Vector3.zero);
             }
             timer = 0;
         }

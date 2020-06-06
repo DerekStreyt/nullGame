@@ -193,10 +193,11 @@ public class Unit : Character
                 Debug.DrawRay(hit.point, Vector3.forward * 10, Color.red);
                 ApplyWaterFx(hit.point, Vector3.up);
 
-                Enemy enemy = hit.collider.GetComponent<Enemy>();
+                DestructibleObject enemy = hit.collider.GetComponent<DestructibleObject>();
                 if (enemy != null)
                 {
-                    enemy.ReceiveDamage(damage);
+                    enemy.ReceiveDamage(damage,hit.point,hit.normal);
+
                     ApplyFireWaterFx(hit.point, Vector3.up);
                 }
 
@@ -236,12 +237,12 @@ public class Unit : Character
           }, 1);
     }
 
-    public override void ReceiveDamage(int damage)
+    public override void ReceiveDamage(int damage, Vector3 position, Vector3 normal)
     {
         if (IsActive)
         {
             GameManager.Instance.CreateDamageHud(damage);
-            base.ReceiveDamage(damage);
+            base.ReceiveDamage(damage,position,normal);
         }
     }
 }

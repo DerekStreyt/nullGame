@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public class UnitWithHealth : UnityPoolObject
 {
@@ -15,7 +16,7 @@ public class UnitWithHealth : UnityPoolObject
     {
         hp = maxHp;
     }
-    public virtual void ReceiveDamage(int damage)
+    public virtual void ReceiveDamage(int damage, Vector3 hitPoint,Vector3 hitNormal)
     {
         if (hp > 0)
         {
