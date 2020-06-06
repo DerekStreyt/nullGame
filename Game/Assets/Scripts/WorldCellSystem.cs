@@ -193,6 +193,8 @@ public class WorldCellSystem : MonoBehaviour
                 Color tempColor = Color.Lerp(NormalColor, FireColor,danger);
                 cube.SetCubeColor(tempColor);
 
+                cube.ShowFire(c.FireDangerScale);
+
                 //if (c.State == CellState.Normal)
                 //{
                 //    cube.SetCubeColor(NormalColor);

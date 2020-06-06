@@ -93,6 +93,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a296969eeead5f4f9a9e3f48eb7277b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHp: 100
+  hp: 100
 --- !u!65 &1631722390665049109
 BoxCollider:
   m_ObjectHideFlags: 0

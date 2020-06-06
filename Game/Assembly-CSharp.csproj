@@ -63,7 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\GridSystem\DebugCube.cs" />
+    <Compile Include="Assets\GridSystemFireSystem\DebugCube.cs" />
+    <Compile Include="Assets\GridSystemFireSystem\Storage.cs" />
     <Compile Include="Assets\Scripts\AnimationByMove.cs" />
     <Compile Include="Assets\Scripts\Bonus.cs" />
     <Compile Include="Assets\Scripts\Cameras\GameCamera.cs" />
