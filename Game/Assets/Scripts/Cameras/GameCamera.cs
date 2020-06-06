@@ -1,9 +1,7 @@
 using UnityEngine;
-using System.Collections;
 
 public class GameCamera : MonoBehaviour
 {
-    public Camera currentCamera;
     public Transform target;
 
     public float distance = 5.0f;
