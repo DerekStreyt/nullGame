@@ -13,6 +13,7 @@ public class GameConfig : MonoBehaviour
     public float hudTime = 2;
     public float hudSpeed = 1;
     public int defaultScore = 1;
+    public float fireIncreaseTime = 1f;
 
     protected virtual void Awake()
     {

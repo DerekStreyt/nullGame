@@ -25,7 +25,7 @@ public class WorldCellSystem : MonoBehaviour
     bool isGridInitialized = false;
 
     float lastFireIncrease = 0f;
-    float fireIncreaseTime = 1f;
+   
    
     private void Awake()
     {
@@ -125,7 +125,7 @@ public class WorldCellSystem : MonoBehaviour
 
     public void UpdateCellsState()
     {
-        if (Time.time - lastFireIncrease > fireIncreaseTime)
+        if (Time.time - lastFireIncrease > GameConfig.Instance.fireIncreaseTime)
         {
             lastFireIncrease = Time.time;
             foreach (Cell c in WorldGrid)

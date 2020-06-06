@@ -24125,6 +24125,11 @@ PrefabInstance:
       propertyPath: unit
       value: 
       objectReference: {fileID: 1956446779}
+    - target: {fileID: 8644716145337547819, guid: 524ff8a7b996e3043a850e9f9113f748,
+        type: 3}
+      propertyPath: fireIncreaseTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8644716145490383620, guid: 524ff8a7b996e3043a850e9f9113f748,
         type: 3}
       propertyPath: m_Name
