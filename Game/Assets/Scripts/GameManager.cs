@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                message.text = "PAUSE";
                 menu.Open();
             }
         }
@@ -67,9 +68,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public virtual void AddScore(int score)
+    public virtual void AddScore(int newScore)
     {
-        this.score += score;
+        Score += newScore;
     }
 
     public virtual void Lose()

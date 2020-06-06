@@ -41,5 +41,6 @@ public class HudUI : UnityPoolObject
         this.target = target;
         text.text = str;
         text.color = color;
+        rectTransform.localScale = Vector3.one;
     }
 }
