@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,23 +10,20 @@ public class GameManager : MonoBehaviour
     public GameInput input;
     public int score = 0;
     public Unit character;
+
+    public event Action<int> onScoreChanged;
+    
     public void StartGame()
     {
-        
+
     }
-    
+
     private static GameManager _instance;
     public static GameManager Instance => _instance;
 
     protected virtual void Awake()
     {
         _instance = this;
-    }
-
-    protected virtual void OnGUI()
-    {
-        GUILayout.Space(100);
-        GUILayout.Label($"SCORE {score}");
     }
 
     public void CreateDamageHud(int damage)
@@ -40,6 +38,16 @@ public class GameManager : MonoBehaviour
         HudUI hud = UnityPoolManager.Instance.PopOrCreate(hudPrefab);
         hud.transform.SetParent(uiParent);
         hud.Attach(input.unit.Position, water.ToString("F2"), Color.blue);
+    }
+
+    private int Score
+    {
+        get => score;
+        set
+        {
+            score = value;
+            onScoreChanged?.Invoke(score);
+        }
     }
 
     public virtual void AddScore(int score)
