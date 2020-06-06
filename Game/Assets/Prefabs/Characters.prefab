@@ -758,7 +758,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.2
   m_SkinWidth: 0.08
@@ -778,10 +778,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 100
   hp: 100
+  dieAnimationTriggerName: IsDie
   waterVertexCount: 50
   maxWater: 100
   currentWater: 100
   waterDecrementSpeed: 0.5
+  physForce: 10
   speed: 3.5
   damage: 1
   maxDistance: 10
@@ -792,7 +794,6 @@ MonoBehaviour:
     m_Bits: 4294967295
   defaultWaterFx: {fileID: 0}
   fireWaterFx: {fileID: 0}
-  dieAnimationTriggerName: IsDie
   hFactor: 0.05
   minForce: 0.5
   maxForce: 6
