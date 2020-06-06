@@ -31,7 +31,7 @@ public class CheckTree : MonoBehaviour
         }
         else if(!fire.IsActive)
         {
-            fire = null;
+            Destroy(this);
         }
     }
 
