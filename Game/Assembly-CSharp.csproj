@@ -67,11 +67,15 @@
     <Compile Include="Assets\Scripts\AnimationByMove.cs" />
     <Compile Include="Assets\Scripts\Bonus.cs" />
     <Compile Include="Assets\Scripts\Cameras\GameCamera.cs" />
+    <Compile Include="Assets\Scripts\Character.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
+    <Compile Include="Assets\Scripts\GameConfig.cs" />
     <Compile Include="Assets\Scripts\GameInput.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\HudUI.cs" />
     <Compile Include="Assets\Scripts\LevelController.cs" />
     <Compile Include="Assets\Scripts\OrbitCamera.cs" />
+    <Compile Include="Assets\Scripts\Panel.cs" />
     <Compile Include="Assets\Scripts\PoolManager\Pool\IPoolObject.cs" />
     <Compile Include="Assets\Scripts\PoolManager\Pool\PoolManager.cs" />
     <Compile Include="Assets\Scripts\PoolManager\UnityPoolManager.cs" />
@@ -80,9 +84,15 @@
     <Compile Include="Assets\Scripts\PoolManager\UnityPoolObjectParticleAndTrail.cs" />
     <Compile Include="Assets\Scripts\PoolManager\UnityPoolObjectWithTime.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
+    <Compile Include="Assets\Scripts\TestFx.cs" />
     <Compile Include="Assets\Scripts\TestWater.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />
+    <Compile Include="Assets\Scripts\UnitWithHealth.cs" />
     <Compile Include="Assets\Scripts\WorldCellSystem.cs" />
+    <Compile Include="Assets\Scripts\Zones\ZoneAddWater.cs" />
+    <Compile Include="Assets\Scripts\Zones\ZoneBase.cs" />
+    <Compile Include="Assets\Scripts\Zones\ZoneDamage.cs" />
+    <None Include="Assets\Polygonal Particles\Assets\Shaders\GradientBackgroundShader.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Unity/2019.3.15f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
