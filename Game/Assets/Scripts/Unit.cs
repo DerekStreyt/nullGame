@@ -53,11 +53,17 @@ public class Unit : Character
         animator = GetComponent<Animator>();
     }
 
-    protected virtual void OnGUI()
+    private float CurrentWater
     {
-        GUILayout.Label($"Hp {hp}");
-        GUILayout.Label($"Water {currentWater}");
-        GUILayout.Label($"Force {force}");
+        get
+        {
+            return currentWater;
+        }
+        set
+        {
+            currentWater = value;
+            onWaterChange?.Invoke(currentWater);
+        }
     }
 
     protected virtual void Start()
@@ -85,14 +91,14 @@ public class Unit : Character
         if (IsActive)
         {
             
-            if (currentWater + water> maxWater)
+            if (CurrentWater + water> maxWater)
             {
-                GameManager.Instance.CreateWaterHud(maxWater - currentWater);
-                currentWater = maxWater;
+                GameManager.Instance.CreateWaterHud(maxWater - CurrentWater);
+                CurrentWater = maxWater;
             }
             else
             {
-                currentWater += water;
+                CurrentWater += water;
                 GameManager.Instance.CreateWaterHud(water);
             }
             
@@ -132,7 +138,7 @@ public class Unit : Character
 
     protected virtual void UseWater()
     {
-        if (currentWater <= 0 || force <= minForce)
+        if (CurrentWater <= 0 || force <= minForce)
         {
             waterRenderer.positionCount = 0;
             force = minForce;
@@ -140,8 +146,7 @@ public class Unit : Character
             return;
         }
 
-        currentWater -= force * waterDecrementSpeed * Time.deltaTime;
-        onWaterChange?.Invoke(currentWater);
+        CurrentWater -= force * waterDecrementSpeed * Time.deltaTime;
 
         Vector3 newTarget = target;
 
