@@ -4956,7 +4956,7 @@ PrefabInstance:
     - target: {fileID: 6428749863013458871, guid: a3f5b64fb2b679b4f955de8b1c621832,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6428749863013458871, guid: a3f5b64fb2b679b4f955de8b1c621832,
         type: 3}
@@ -7027,6 +7027,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StorageList:
   - {fileID: 1109382730524982515, guid: 38cc1ce8b9b88f940b237bf06d1eb424, type: 3}
+  - {fileID: 4449884551767269004, guid: 714e5206794cff644b969f58a9984ef4, type: 3}
+  - {fileID: 1991059651842181305, guid: 2c6ebc12587b12b4cbc2ed4c5de2944d, type: 3}
 --- !u!4 &628586826
 Transform:
   m_ObjectHideFlags: 0
@@ -9266,7 +9268,7 @@ Transform:
   m_LocalScale: {x: 1.3323, y: 1, z: 1.4896}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &731746733
 MonoBehaviour:
