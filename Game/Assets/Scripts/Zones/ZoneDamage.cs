@@ -13,7 +13,10 @@ public class ZoneDamage : ZoneBase<Character>
         {
             foreach (var character in characters)
             {
-                character.ReceiveDamage(GameConfig.Instance.damageByZone,Vector3.zero,Vector3.zero);
+                if (Validate(character))
+                {
+                    character.ReceiveDamage(GameConfig.Instance.damageByZone, Vector3.zero, Vector3.zero);
+                }
             }
             timer = 0;
         }
@@ -21,6 +24,11 @@ public class ZoneDamage : ZoneBase<Character>
         {
             timer += Time.deltaTime;
         }
+    }
+
+    protected virtual bool Validate(Character character)
+    {
+        return true;
     }
 
     protected override void OnEnter(Character unit)
