@@ -8,24 +8,14 @@ public class GameManager : MonoBehaviour
     public HudUI hudPrefab;
     public GameInput input;
     public int score = 0;
+    public Unit character;
     public void StartGame()
     {
         
     }
     
     private static GameManager _instance;
-    public static GameManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new GameManager();
-            }
-
-            return _instance;
-        }
-    }
+    public static GameManager Instance => _instance;
 
     protected virtual void Awake()
     {
@@ -49,7 +39,7 @@ public class GameManager : MonoBehaviour
     {
         HudUI hud = UnityPoolManager.Instance.PopOrCreate(hudPrefab);
         hud.transform.SetParent(uiParent);
-        hud.Attach(input.unit.Position, water.ToString("F2"), Color.green);
+        hud.Attach(input.unit.Position, water.ToString("F2"), Color.blue);
     }
 
     public virtual void AddScore(int score)

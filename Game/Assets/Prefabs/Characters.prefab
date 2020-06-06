@@ -760,7 +760,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.2
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
@@ -795,9 +795,9 @@ MonoBehaviour:
   dieAnimationTriggerName: IsDie
   hFactor: 0.05
   minForce: 0.5
-  maxForce: 10
+  maxForce: 6
   force: 5
-  forceStep: 2
+  forceStep: 4
   waterRenderer: {fileID: 4438186211377167205}
   waterPivot: {fileID: 8886266546442962684}
   gravity: 0.1
@@ -2072,8 +2072,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 1, z: 0}
+  - {x: 0, y: 0, z: 2}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -2094,8 +2094,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0.01717885, g: 0, b: 0.9339623, a: 1}
+      key1: {r: 0.22258809, g: 0.68818736, b: 0.7735849, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
