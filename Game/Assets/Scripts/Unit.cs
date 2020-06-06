@@ -192,10 +192,6 @@ public class Unit : Character
                     enemy.ReceiveDamage(damage);
                     ApplyFireWaterFx(hit.point, Vector3.up);
                 }
-                else
-                {
-                    ApplyFireWaterFx(new Vector3(1000, 0, 0), Vector3.up);
-                }
 
                 waterRenderer.SetPosition(i, hit.point);
                 waterRenderer.positionCount = i + 1;
@@ -220,12 +216,10 @@ public class Unit : Character
 
     protected virtual void ApplyFireWaterFx(Vector3 position, Vector3 normal)
     {
-        fireWaterFx.transform.position = position;
-        /*  defaultWaterFx.Emit(new ParticleSystem.EmitParams()
+        //  fireWaterFx.transform.position = position;
+        fireWaterFx.Emit(new ParticleSystem.EmitParams()
           {
               position = position
-          }, 1);*/
+          }, 1);
     }
-
-   
 }
