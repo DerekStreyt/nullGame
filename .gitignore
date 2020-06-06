@@ -6,3 +6,8 @@ Game/.vs/Game/v16/.suo
 *.cache
 *.cache
 /Game/.vs
+Game/Assembly-CSharp.csproj
+Game/.idea/.idea.Game/riderModule.iml
+Game/.idea/.idea.Game/.idea/vcs.xml
+Game/.idea/.idea.Game/.idea/misc.xml
+Game/.idea/.idea.Game/.idea/indexLayout.xml

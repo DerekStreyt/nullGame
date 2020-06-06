@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
 
     public Slider hpBar;
     public Slider waterBar;
+
+    public Text scoreText;
     
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,9 @@ public class UIManager : MonoBehaviour
         hpBar.maxValue = GameManager.Instance.input.unit.maxHp;
         GameManager.Instance.input.unit.onReceiveDamage += OnHealthChanged;
         OnHealthChanged(hpBar.maxValue);
+
+        GameManager.Instance.onScoreChanged += OnScoreChanged;
+        OnScoreChanged(0);
     }
 
     private void OnHealthChanged(float hp)
@@ -33,6 +38,11 @@ public class UIManager : MonoBehaviour
     private void OnWaterChanged(float water)
     {
         waterBar.value = water;
+    }
+
+    private void OnScoreChanged(int score)
+    {
+        scoreText.text = score.ToString();
     }
     
     private void OnObjectivesButtonClick()
