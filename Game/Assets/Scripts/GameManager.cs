@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +12,7 @@ public class GameManager : MonoBehaviour
     public event Action<int> onScoreChanged;
     public Text message;
     public Panel menu;
+    public UnityPoolObjectParticle coinFx;
     
     public void StartGame()
     {
@@ -56,6 +55,11 @@ public class GameManager : MonoBehaviour
         HudUI hud = UnityPoolManager.Instance.PopOrCreate(hudPrefab);
         hud.transform.SetParent(uiParent);
         hud.Attach(input.unit.Position, water.ToString("F2"), Color.blue);
+    }
+
+    public void CreateCoinFx(Vector3 position)
+    {
+        UnityPoolManager.Instance.PopOrCreate(coinFx, position, Quaternion.identity);
     }
 
     private int Score
