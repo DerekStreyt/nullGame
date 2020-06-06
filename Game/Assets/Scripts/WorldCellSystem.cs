@@ -9,7 +9,9 @@ public class WorldCellSystem : MonoBehaviour
     public Vector3 WorldOrigin;
     public float CellSize;
 
-    public int WorldSizeCells = 10;
+    //public int WorldSizeCells = 10;
+    public Vector2Int WorldSize = new Vector2Int(40, 40);
+
     public static WorldCellSystem Instance;
 
     private Cell[,] WorldGrid = new Cell[10, 10];
@@ -53,14 +55,18 @@ public class WorldCellSystem : MonoBehaviour
 
     void GenerateGrid()
     {
-        WorldGrid = new Cell[WorldSizeCells, WorldSizeCells];
+        WorldGrid = new Cell[WorldSize.x, WorldSize.y];
 
         int gridCount = 0;
         Vector3 currentPos = Vector3.zero;
 
-        for(int x=0;x<WorldSizeCells;x++)
+        currentPos = WorldOrigin;
+
+        for(int x=0;x< WorldSize.x; x++)
         {
-            for (int z = 0; z < WorldSizeCells; z++)
+            currentPos.z = WorldOrigin.z;
+
+            for (int z = 0; z < WorldSize.y; z++)
             {
                 Cell newCell = new Cell(x, z,currentPos);
                 newCell.State = CellState.Normal;
@@ -70,8 +76,10 @@ public class WorldCellSystem : MonoBehaviour
                 currentPos.z += CellSize;
             }
             // currentPos.x = WorldOrigin.x;
-            currentPos.z = WorldOrigin.z;
+           
             currentPos.x += CellSize;
+
+
         }
 
         Debug.Log("Cells created:" + gridCount);
@@ -90,14 +98,14 @@ public class WorldCellSystem : MonoBehaviour
 
     public Cell GetCell(Vector3 position)
     {
-        Cell maxCell = WorldGrid[WorldSizeCells-1, WorldSizeCells-1];
+        Cell maxCell = WorldGrid[WorldSize.x- 1, WorldSize.y-1];
         
         Vector3 maxPosition = maxCell.CellWorldPos;
         maxPosition += new Vector3(CellSize, 0f, CellSize);
         Vector3 gridPosition = WorldCordsToCellCords(position);
 
-        float cellIndexX = (gridPosition.x / maxPosition.x)* WorldSizeCells;
-        float cellIndexY = (gridPosition.z / maxPosition.z)* WorldSizeCells;
+        float cellIndexX = (gridPosition.x / maxPosition.x)* WorldSize.x;
+        float cellIndexY = (gridPosition.z / maxPosition.z)* WorldSize.y;
 
         Cell resultCell = GetCell((int)cellIndexX, (int)cellIndexY);
 
@@ -162,16 +170,20 @@ public class WorldCellSystem : MonoBehaviour
 
     public void CreateDebugCubes()
     {
-        CubesList = new DebugCube[WorldSizeCells, WorldSizeCells];
+        CubesList = new DebugCube[WorldSize.x, WorldSize.y];
 
         foreach(Cell c in WorldGrid)
         {
             Vector3 pos = CellCordsToWorldCords(c.CellWorldPos);
             GameObject cellObj = Instantiate(CellPrefab, pos, Quaternion.identity);
-            cellObj.transform.SetParent(GridParent.transform);
+            cellObj.transform.SetParent(GridParent.transform,true);
+            cellObj.transform.position = pos;
+
             DebugCube thisCube= cellObj.GetComponent<DebugCube>();
             thisCube.SetCell(c);
             CubesList[c.PositionIndex.x, c.PositionIndex.y] = thisCube;
+
+           // Debug.Log("Cell:" + c.PositionIndex+";    world cord:"+pos);
         }
     }
 
@@ -219,8 +231,8 @@ public class WorldCellSystem : MonoBehaviour
 
     public Cell GetCell(int x,int y)
     {
-        x = Mathf.Clamp(x, 0, WorldSizeCells-1);
-        y = Mathf.Clamp(y, 0, WorldSizeCells-1);
+        x = Mathf.Clamp(x, 0, WorldSize.x-1);
+        y = Mathf.Clamp(y, 0, WorldSize.y-1);
 
         return WorldGrid[x, y];
     }
@@ -229,8 +241,8 @@ public class WorldCellSystem : MonoBehaviour
     {
         for (int i = 0; i < count; i++)
         {
-            int randomX = UnityEngine.Random.Range(0, WorldSizeCells);
-            int randomY = UnityEngine.Random.Range(0, WorldSizeCells);
+            int randomX = UnityEngine.Random.Range(0, WorldSize.x);
+            int randomY = UnityEngine.Random.Range(0, WorldSize.y);
 
             var cell = GetCell(randomX, randomY);
             //start with medium fire

@@ -45,7 +45,14 @@ public class DebugCube : DestructibleObject
 
     public virtual bool CanDamage()
     {
-        return CurrentCell.FireDangerScale > 3;
+        if (CurrentCell != null)
+        {
+            return CurrentCell.FireDangerScale > 3;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void SetCubeColor(Color c)
