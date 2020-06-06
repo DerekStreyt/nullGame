@@ -23,8 +23,6 @@ public class Unit : Character
     public ParticleSystem defaultWaterFx;
     public ParticleSystem fireWaterFx;
 
-    public string dieAnimationTriggerName = "IsDie";
-
     public float hFactor = 0.05f;
     public float minForce = 0.5f;
     public float maxForce = 10f;
@@ -44,15 +42,7 @@ public class Unit : Character
 
     private Vector3 offset;
     private float offsetTimer;
-    protected CharacterController characterController;
-    protected Animator animator;
 
-    protected override void Awake()
-    {
-        base.Awake();
-        characterController = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>();
-    }
 
     private float CurrentWater
     {
@@ -128,8 +118,8 @@ public class Unit : Character
 
     protected override void OnDie()
     {
+        base.OnDie();
         force = 0;
-        animator.SetTrigger(dieAnimationTriggerName);
         GameManager.Instance.Lose();
     }
 
