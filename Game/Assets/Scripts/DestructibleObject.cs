@@ -3,7 +3,5 @@
     protected override void OnDie()
     {
         Push();
-    }
-
-   
+    } 
 }

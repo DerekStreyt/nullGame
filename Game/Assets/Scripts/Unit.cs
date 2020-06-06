@@ -121,6 +121,7 @@ public class Unit : Character
 
     protected override void OnDie()
     {
+        force = 0;
         animator.SetTrigger(dieAnimationTriggerName);
     }
 
@@ -196,9 +197,10 @@ public class Unit : Character
                 DestructibleObject enemy = hit.collider.GetComponent<DestructibleObject>();
                 if (enemy != null)
                 {
-                    enemy.ReceiveDamage(damage,hit.point,hit.normal);
-
-                    ApplyFireWaterFx(hit.point, Vector3.up);
+                    if (enemy.ReceiveDamage(damage, hit.point, hit.normal))
+                    {
+                        ApplyFireWaterFx(hit.point, Vector3.up);
+                    }
                 }
 
                 Rigidbody rigidbody = hit.collider.GetComponent<Rigidbody>();
@@ -222,10 +224,6 @@ public class Unit : Character
     protected virtual void ApplyWaterFx(Vector3 position, Vector3 normal)
     {
         defaultWaterFx.transform.position = position;
-      /*  defaultWaterFx.Emit(new ParticleSystem.EmitParams()
-        {
-            position = position
-        }, 1);*/
     }
 
     protected virtual void ApplyFireWaterFx(Vector3 position, Vector3 normal)
@@ -237,12 +235,15 @@ public class Unit : Character
           }, 1);
     }
 
-    public override void ReceiveDamage(int damage, Vector3 position, Vector3 normal)
+    public override bool ReceiveDamage(int damage, Vector3 position, Vector3 normal)
     {
+        bool result = false;
         if (IsActive)
         {
             GameManager.Instance.CreateDamageHud(damage);
-            base.ReceiveDamage(damage,position,normal);
+            result = base.ReceiveDamage(damage,position,normal);
         }
+
+        return result;
     }
 }
