@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,7 +9,9 @@ public class GameManager : MonoBehaviour
     public HudUI hudPrefab;
     public GameInput input;
     public int score = 0;
-    public Unit character;
+
+    public Text message;
+    public Panel menu;
     public void StartGame()
     {
         
@@ -28,6 +31,21 @@ public class GameManager : MonoBehaviour
         GUILayout.Label($"SCORE {score}");
     }
 
+    protected virtual void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (menu.IsActive)
+            {
+                menu.Close();
+            }
+            else
+            {
+                menu.Open();
+            }
+        }
+    }
+
     public void CreateDamageHud(int damage)
     {
         HudUI hud = UnityPoolManager.Instance.PopOrCreate(hudPrefab);
@@ -45,5 +63,11 @@ public class GameManager : MonoBehaviour
     public virtual void AddScore(int score)
     {
         this.score += score;
+    }
+
+    public virtual void Lose()
+    {
+        message.text = "GAME OVER";
+        menu.Open();
     }
 }
