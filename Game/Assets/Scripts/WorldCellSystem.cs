@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -115,13 +116,7 @@ public class WorldCellSystem : MonoBehaviour
         return resultPos;
     }
 
-    public void SimulateFire()
-    {
-        foreach (Cell c in WorldGrid)
-        {
-            c.FireDangerScale = Random.Range(0, 4);
-        }
-    }
+
 
     public void UpdateCellsState()
     {
@@ -193,7 +188,11 @@ public class WorldCellSystem : MonoBehaviour
                 Color tempColor = Color.Lerp(NormalColor, FireColor,danger);
                 cube.SetCubeColor(tempColor);
 
-                cube.ShowFire(c.FireDangerScale);
+
+                //clamp to not recreate animations
+                float fireScale = Mathf.Clamp(c.FireDangerScale, 0, 10);
+
+                cube.ShowFire(fireScale);
 
                 //if (c.State == CellState.Normal)
                 //{
@@ -230,8 +229,8 @@ public class WorldCellSystem : MonoBehaviour
     {
         for (int i = 0; i < count; i++)
         {
-            int randomX = Random.Range(0, WorldSizeCells);
-            int randomY = Random.Range(0, WorldSizeCells);
+            int randomX = UnityEngine.Random.Range(0, WorldSizeCells);
+            int randomY = UnityEngine.Random.Range(0, WorldSizeCells);
 
             var cell = GetCell(randomX, randomY);
             //start with medium fire
