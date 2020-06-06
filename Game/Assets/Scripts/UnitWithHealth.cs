@@ -3,27 +3,36 @@ using UnityEngine;
 
 public class UnitWithHealth : UnityPoolObject
 {
-    public int maxHp = 100;
+    public float maxHp = 100;
 
-    public int hp = 100;
+    public float hp = 100;
 
     public event Action onDie;
-    public event Action<int, int> onReceiveDamage; // hp before damage
+    public event Action<float> onReceiveDamage; // hp before damage
 
-    public float Hp01 => (float)hp / maxHp;
     public bool IsActive => hp > 0;
     public override void AfterCreate()
     {
         hp = maxHp;
     }
+
+    private float HP
+    {
+        get => hp;
+        set
+        {
+            hp = value;
+            onReceiveDamage?.Invoke(hp);
+        }
+    }
+    
     public virtual bool ReceiveDamage(int damage, Vector3 hitPoint, Vector3 hitNormal)
     {
         bool result = false;
-        if (hp > 0)
+        if (HP > 0)
         {
-            onReceiveDamage?.Invoke(hp, damage);
-            hp -= damage;
-            if (hp <= 0)
+            HP -= damage;
+            if (HP <= 0)
             {
                 onDie?.Invoke();
                 OnDie();
