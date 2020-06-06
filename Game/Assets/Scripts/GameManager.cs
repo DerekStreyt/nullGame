@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public Transform uiParent;
     public HudUI hudPrefab;
     public GameInput input;
-
+    public int score = 0;
     public void StartGame()
     {
         
@@ -32,6 +32,12 @@ public class GameManager : MonoBehaviour
         _instance = this;
     }
 
+    protected virtual void OnGUI()
+    {
+        GUILayout.Space(100);
+        GUILayout.Label($"SCORE {score}");
+    }
+
     public void CreateDamageHud(int damage)
     {
         HudUI hud = UnityPoolManager.Instance.PopOrCreate(hudPrefab);
@@ -44,5 +50,10 @@ public class GameManager : MonoBehaviour
         HudUI hud = UnityPoolManager.Instance.PopOrCreate(hudPrefab);
         hud.transform.SetParent(uiParent);
         hud.Attach(input.unit.Position, water.ToString("F2"), Color.green);
+    }
+
+    public virtual void AddScore(int score)
+    {
+        this.score += score;
     }
 }

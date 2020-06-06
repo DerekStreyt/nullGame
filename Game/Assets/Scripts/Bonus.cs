@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Bonus : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int score = 10;
 
-    // Update is called once per frame
-    void Update()
+    protected bool isUsed = false;
+    public virtual void Apply()
     {
-        
+        if (!isUsed)
+        {
+            GameManager.Instance.AddScore(score);
+            isUsed = true;
+        }
     }
 }

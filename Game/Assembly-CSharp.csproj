@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\HudUI.cs" />
     <Compile Include="Assets\Scripts\LevelController.cs" />
+    <Compile Include="Assets\Scripts\MessageUI.cs" />
     <Compile Include="Assets\Scripts\Panel.cs" />
     <Compile Include="Assets\Scripts\PoolManager\Pool\IPoolObject.cs" />
     <Compile Include="Assets\Scripts\PoolManager\Pool\PoolManager.cs" />

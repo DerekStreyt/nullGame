@@ -203,6 +203,12 @@ public class Unit : Character
                     }
                 }
 
+                Bonus bonus = hit.collider.GetComponent<Bonus>();
+                if (bonus != null)
+                {
+                    bonus.Apply();
+                }
+
                 Rigidbody rigidbody = hit.collider.GetComponent<Rigidbody>();
                 if (rigidbody != null)
                 {
