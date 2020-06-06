@@ -28035,16 +28035,6 @@ PrefabInstance:
       propertyPath: uiParent
       value: 
       objectReference: {fileID: 764180469}
-    - target: {fileID: 976346860, guid: 524ff8a7b996e3043a850e9f9113f748, type: 3}
-      propertyPath: waterHudPrefab
-      value: 
-      objectReference: {fileID: 4244237827409712576, guid: 5bf2925583ce5b540a4893cd01bdb173,
-        type: 3}
-    - target: {fileID: 976346860, guid: 524ff8a7b996e3043a850e9f9113f748, type: 3}
-      propertyPath: hudPrefab
-      value: 
-      objectReference: {fileID: 7651500276129836091, guid: 92873145b0ae76a4d9d87f85ec76d5fc,
-        type: 3}
     - target: {fileID: 1579734321, guid: 524ff8a7b996e3043a850e9f9113f748, type: 3}
       propertyPath: rayCamera
       value: 
@@ -28053,16 +28043,6 @@ PrefabInstance:
       propertyPath: unit
       value: 
       objectReference: {fileID: 1956446779}
-    - target: {fileID: 8644716145337547819, guid: 524ff8a7b996e3043a850e9f9113f748,
-        type: 3}
-      propertyPath: hudSpeed
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 8644716145337547819, guid: 524ff8a7b996e3043a850e9f9113f748,
-        type: 3}
-      propertyPath: hudTime
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8644716145490383620, guid: 524ff8a7b996e3043a850e9f9113f748,
         type: 3}
       propertyPath: m_Name

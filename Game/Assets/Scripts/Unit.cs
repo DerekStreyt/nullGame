@@ -84,12 +84,18 @@ public class Unit : Character
     {
         if (IsActive)
         {
-            currentWater += water;
-            if (currentWater > maxWater)
+            
+            if (currentWater + water> maxWater)
             {
+                GameManager.Instance.CreateWaterHud(maxWater - currentWater);
                 currentWater = maxWater;
             }
-            GameManager.Instance.CreateWaterHud(water);
+            else
+            {
+                currentWater += water;
+                GameManager.Instance.CreateWaterHud(water);
+            }
+            
         }
     }
 

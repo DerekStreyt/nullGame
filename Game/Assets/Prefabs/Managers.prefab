@@ -44,9 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiParent: {fileID: 0}
-  damageHudPrefab: {fileID: 7651500276129836091, guid: 92873145b0ae76a4d9d87f85ec76d5fc,
-    type: 3}
-  waterHudPrefab: {fileID: 7651500276129836091, guid: 92873145b0ae76a4d9d87f85ec76d5fc,
+  hudPrefab: {fileID: 7651500276129836091, guid: 92873145b0ae76a4d9d87f85ec76d5fc,
     type: 3}
   input: {fileID: 1579734321}
 --- !u!1 &1579734320
@@ -186,10 +184,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   addWater: 10
   addWaterTime: 1
-  damageByZone: 25
+  damageByZone: 20
   damageTime: 1
-  hudTime: 2
-  hudSpeed: 1
+  hudTime: 1
+  hudSpeed: 50
 --- !u!1 &8644716145490383620
 GameObject:
   m_ObjectHideFlags: 0
