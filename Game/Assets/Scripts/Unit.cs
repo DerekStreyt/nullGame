@@ -89,6 +89,7 @@ public class Unit : Character
             {
                 currentWater = maxWater;
             }
+            GameManager.Instance.CreateWaterHud(water);
         }
     }
 
@@ -221,5 +222,14 @@ public class Unit : Character
           {
               position = position
           }, 1);
+    }
+
+    public override void ReceiveDamage(int damage)
+    {
+        if (IsActive)
+        {
+            GameManager.Instance.CreateDamageHud(damage);
+            base.ReceiveDamage(damage);
+        }
     }
 }
