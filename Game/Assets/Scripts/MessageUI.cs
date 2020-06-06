@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MessageUI : MonoBehaviour
 {
-    protected Transform target;
+    public Transform target;
     public Vector3 offset;
     protected RectTransform rectTransform;
 
