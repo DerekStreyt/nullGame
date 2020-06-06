@@ -66,6 +66,7 @@
     <Compile Include="Assets\GridSystem\DebugCube.cs" />
     <Compile Include="Assets\Scripts\AnimationByMove.cs" />
     <Compile Include="Assets\Scripts\Cameras\GameCamera.cs" />
+    <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\GameInput.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\LevelController.cs" />
