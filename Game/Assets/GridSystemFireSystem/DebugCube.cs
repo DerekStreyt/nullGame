@@ -15,7 +15,7 @@ public class DebugCube : DestructibleObject
     Vector3 effectOffset = new Vector3(0f, 0.5f, 0f);
 
     // Start is called before the first frame update
-    override protected void Awake()
+    protected override void Awake()
     {
         base.Awake();
         render = GetComponent<MeshRenderer>();
@@ -31,15 +31,19 @@ public class DebugCube : DestructibleObject
     public override bool ReceiveDamage(int damage,Vector3 worldPosition,Vector3 hitNormal)
     {
       //  Debug.Log("pos:" + worldPosition);
-
+        bool result = false;
         if(CurrentCell!=null)
         {
+            result = CurrentCell.FireDangerScale > 0;
             CurrentCell.FireDangerScale = 0;
-            return true;
         }
 
-        return false;
+        return result;
+    }
 
+    public virtual bool CanDamage()
+    {
+        return CurrentCell.FireDangerScale > 3;
     }
 
     public void SetCubeColor(Color c)

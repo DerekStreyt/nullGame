@@ -94,6 +94,7 @@
     <Compile Include="Assets\Scripts\Zones\ZoneAddWater.cs" />
     <Compile Include="Assets\Scripts\Zones\ZoneBase.cs" />
     <Compile Include="Assets\Scripts\Zones\ZoneDamage.cs" />
+    <Compile Include="Assets\Scripts\Zones\ZoneDamageCell.cs" />
     <None Include="Assets\Polygonal Particles\Assets\Shaders\GradientBackgroundShader.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Unity/2019.3.15f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

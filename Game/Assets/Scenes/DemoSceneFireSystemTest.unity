@@ -24104,6 +24104,11 @@ PrefabInstance:
       propertyPath: speed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4438186212314640847, guid: 4d6f528d3b425164bab7df8046118e99,
+        type: 3}
+      propertyPath: waterMask.m_Bits
+      value: 1847
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d6f528d3b425164bab7df8046118e99, type: 3}
 --- !u!1001 &8644716145446248065
