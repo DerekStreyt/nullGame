@@ -10,6 +10,15 @@ public class CheckTree : MonoBehaviour
     protected float timer = 0;
     protected DestructibleObject fire;
 
+
+    protected virtual void Start()
+    {
+        if (WorldCellSystem.Instance == null)
+        {
+            Destroy(this);
+        }
+    }
+
     protected virtual void Update()
     {
         if (fire == null)
