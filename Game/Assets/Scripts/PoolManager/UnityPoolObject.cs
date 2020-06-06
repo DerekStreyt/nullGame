@@ -19,7 +19,7 @@ public class UnityPoolObject : MonoBehaviour, IPoolObject
 
     public virtual void Create()
     {
-        MyTransform.parent = null;
+        MyTransform.SetParent(null);
         gameObject.SetActive(true);
  }
 

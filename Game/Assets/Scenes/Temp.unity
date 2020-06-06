@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18318772, g: 0.22884375, b: 0.3065002, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -29109,12 +29109,7 @@ PrefabInstance:
     - target: {fileID: 1604011421333233488, guid: 3fdb8ed72b26ec74db240824efc8af2d,
         type: 3}
       propertyPath: m_Name
-      value: Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 1604011421333233488, guid: 3fdb8ed72b26ec74db240824efc8af2d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: TutorialUI
       objectReference: {fileID: 0}
     - target: {fileID: 1604011421333233492, guid: 3fdb8ed72b26ec74db240824efc8af2d,
         type: 3}

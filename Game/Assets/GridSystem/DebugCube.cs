@@ -1,15 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Cell = WorldCellSystem.Cell;
 
 public class DebugCube : DestructibleObject
 {
     MeshRenderer render;
     private Cell CurrentCell;
-    
+
     // Start is called before the first frame update
-    override protected void Awake()
+    protected override void Awake()
     {
         base.Awake();
         render = GetComponent<MeshRenderer>();
@@ -22,21 +20,21 @@ public class DebugCube : DestructibleObject
 
     // Update is called once per frame
 
-    public override void ReceiveDamage(int damage,Vector3 worldPosition,Vector3 hitNormal)
+    public override bool ReceiveDamage(int damage, Vector3 worldPosition, Vector3 hitNormal)
     {
-        Debug.Log("pos:" + worldPosition);
-
-
-        if(CurrentCell!=null)
+        bool result = false;
+        if (CurrentCell != null)
         {
+            result = CurrentCell.FireDangerScale > 0;
             CurrentCell.FireDangerScale = 0;
         }
 
+        return result;
     }
 
     public void SetCubeColor(Color c)
     {
-       // render.material.color = c;
+        // render.material.color = c;
         render.material.SetColor("_BaseColor", c);
     }
 
