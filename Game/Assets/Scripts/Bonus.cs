@@ -12,6 +12,7 @@ public class Bonus : MonoBehaviour
         if (!isUsed)
         {
             GameManager.Instance.AddScore(score);
+            GameManager.Instance.CreateCoinFx(transform.position);
             isUsed = true;
         }
     }
