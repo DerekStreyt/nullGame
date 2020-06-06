@@ -28,14 +28,17 @@ public class DebugCube : DestructibleObject
 
     // Update is called once per frame
 
-    public override void ReceiveDamage(int damage,Vector3 worldPosition,Vector3 hitNormal)
+    public override bool ReceiveDamage(int damage,Vector3 worldPosition,Vector3 hitNormal)
     {
       //  Debug.Log("pos:" + worldPosition);
 
         if(CurrentCell!=null)
         {
             CurrentCell.FireDangerScale = 0;
+            return true;
         }
+
+        return false;
 
     }
 
