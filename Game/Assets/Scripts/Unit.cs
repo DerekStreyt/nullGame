@@ -12,6 +12,7 @@ public class Unit : Character
 
     public event Action<float> onWaterChange;
 
+    public float physForce = 10;
     public float speed = 3.5f;
     public int damage = 1;
     public float maxDistance = 10;
@@ -218,7 +219,7 @@ public class Unit : Character
                 Rigidbody rigidbody = hit.collider.GetComponent<Rigidbody>();
                 if (rigidbody != null)
                 {
-                    rigidbody.AddForceAtPosition(direction.normalized * force, hit.point, ForceMode.Force);
+                    rigidbody.AddForceAtPosition(direction.normalized * force * physForce, hit.point, ForceMode.Force);
                 }
 
                 waterRenderer.SetPosition(i, hit.point);
