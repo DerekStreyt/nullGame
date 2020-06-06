@@ -1,12 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+﻿using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class Unit : MonoBehaviour
+public class Unit : Character
 {
     public int waterVertexCount = 50;
-    
+
+    public float maxWater = 100;
+    public float currentWater = 100;
+    public float waterDecrementSpeed = 0.5f;
+
+    public event Action<float> onWaterChange;
+
+    public float speed = 3.5f;
     public int damage = 1;
     public float maxDistance = 10;
     public Vector3 Position => transform.position;
@@ -15,6 +21,8 @@ public class Unit : MonoBehaviour
     public LayerMask waterMask;
     public ParticleSystem defaultWaterFx;
     public ParticleSystem fireWaterFx;
+
+    public string dieAnimationTriggerName = "IsDie";
 
     public float hFactor = 0.05f;
     public float minForce = 0.5f;
@@ -30,11 +38,27 @@ public class Unit : MonoBehaviour
     public float offsetRadius;
     public float waterMoveSpeed = 2;
 
+
     private Vector3 waterTarget;
 
     private Vector3 offset;
     private float offsetTimer;
+    protected CharacterController characterController;
+    protected Animator animator;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        characterController = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
+    }
+
+    protected virtual void OnGUI()
+    {
+        GUILayout.Label($"Hp {hp}");
+        GUILayout.Label($"Water {currentWater}");
+        GUILayout.Label($"Force {force}");
+    }
 
     protected virtual void Start()
     {
@@ -43,19 +67,61 @@ public class Unit : MonoBehaviour
 
     protected virtual void Update()
     {
-        Vector3 lookAt = GetLookPoint() - Position;
-        if (lookAt.sqrMagnitude > 0.01)
+        if (IsActive)
         {
-            Quaternion lookRotation = Quaternion.LookRotation(lookAt);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotateSpeed * Time.deltaTime);
+            Vector3 lookAt = GetLookPoint() - Position;
+            if (lookAt.sqrMagnitude > 0.01)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(lookAt);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotateSpeed * Time.deltaTime);
+            }
+
+            UseWater();
         }
-        UseWater();
+    }
+
+    public virtual void AddWater(float water)
+    {
+        if (IsActive)
+        {
+            
+            if (currentWater + water> maxWater)
+            {
+                GameManager.Instance.CreateWaterHud(maxWater - currentWater);
+                currentWater = maxWater;
+            }
+            else
+            {
+                currentWater += water;
+                GameManager.Instance.CreateWaterHud(water);
+            }
+            
+        }
+    }
+
+    public virtual void Move(Vector3 direction)
+    {
+        if (IsActive)
+        {
+            Vector3 moveDirection = direction.normalized;
+            moveDirection *= speed;
+            moveDirection.y = -1;
+            characterController.Move(moveDirection * Time.deltaTime);
+        }
     }
 
     public virtual void SetForce(float direction)
     {
-        force += direction * forceStep * Time.deltaTime;
-        force = Mathf.Clamp(force, minForce, maxForce);
+        if (IsActive)
+        {
+            force += direction * forceStep * Time.deltaTime;
+            force = Mathf.Clamp(force, minForce, maxForce);
+        }
+    }
+
+    protected override void OnDie()
+    {
+        animator.SetTrigger(dieAnimationTriggerName);
     }
 
     protected virtual Vector3 GetLookPoint()
@@ -65,6 +131,17 @@ public class Unit : MonoBehaviour
 
     protected virtual void UseWater()
     {
+        if (currentWater <= 0 || force <= minForce)
+        {
+            waterRenderer.positionCount = 0;
+            force = minForce;
+            ApplyWaterFx(new Vector3(1000, 0, 0), Vector3.up);
+            return;
+        }
+
+        currentWater -= force * waterDecrementSpeed * Time.deltaTime;
+        onWaterChange?.Invoke(currentWater);
+
         Vector3 newTarget = target;
 
         float distanceToTarget = Vector3.Distance(Position, newTarget);
@@ -122,10 +199,6 @@ public class Unit : MonoBehaviour
                     enemy.ReceiveDamage(damage);
                     ApplyFireWaterFx(hit.point, Vector3.up);
                 }
-                else
-                {
-                    ApplyFireWaterFx(new Vector3(1000, 0, 0), Vector3.up);
-                }
 
                 waterRenderer.SetPosition(i, hit.point);
                 waterRenderer.positionCount = i + 1;
@@ -150,10 +223,19 @@ public class Unit : MonoBehaviour
 
     protected virtual void ApplyFireWaterFx(Vector3 position, Vector3 normal)
     {
-        fireWaterFx.transform.position = position;
-        /*  defaultWaterFx.Emit(new ParticleSystem.EmitParams()
+        //  fireWaterFx.transform.position = position;
+        fireWaterFx.Emit(new ParticleSystem.EmitParams()
           {
               position = position
-          }, 1);*/
+          }, 1);
+    }
+
+    public override void ReceiveDamage(int damage)
+    {
+        if (IsActive)
+        {
+            GameManager.Instance.CreateDamageHud(damage);
+            base.ReceiveDamage(damage);
+        }
     }
 }
