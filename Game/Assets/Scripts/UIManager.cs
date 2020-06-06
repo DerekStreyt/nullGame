@@ -18,12 +18,12 @@ public class UIManager : MonoBehaviour
         objectivesButton.onClick.AddListener(OnObjectivesButtonClick);
         closeButton.onClick.AddListener(OnObjectivesButtonClick);
 
-        waterBar.maxValue = GameManager.Instance.character.maxWater;
-        GameManager.Instance.character.onWaterChange += OnWaterChanged;
+        waterBar.maxValue = GameManager.Instance.input.unit.maxWater;
+        GameManager.Instance.input.unit.onWaterChange += OnWaterChanged;
         OnWaterChanged(waterBar.maxValue);
         
-        hpBar.maxValue = GameManager.Instance.character.maxHp;
-        GameManager.Instance.character.onReceiveDamage += OnHealthChanged;
+        hpBar.maxValue = GameManager.Instance.input.unit.maxHp;
+        GameManager.Instance.input.unit.onReceiveDamage += OnHealthChanged;
         OnHealthChanged(hpBar.maxValue);
 
         GameManager.Instance.onScoreChanged += OnScoreChanged;

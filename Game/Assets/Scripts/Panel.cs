@@ -6,6 +6,8 @@ public class Panel : MonoBehaviour
 {
     public Panel nextPanel;
 
+    public bool IsActive => gameObject.activeSelf;
+
     public virtual void Open()
     {
         gameObject.SetActive(true);

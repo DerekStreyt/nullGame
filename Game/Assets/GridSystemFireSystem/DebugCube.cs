@@ -14,6 +14,8 @@ public class DebugCube : DestructibleObject
 
     Vector3 effectOffset = new Vector3(0f, 0.5f, 0f);
 
+    float prevIntensity = 0f;
+
     // Start is called before the first frame update
     protected override void Awake()
     {
@@ -43,7 +45,14 @@ public class DebugCube : DestructibleObject
 
     public virtual bool CanDamage()
     {
-        return CurrentCell.FireDangerScale > 3;
+        if (CurrentCell != null)
+        {
+            return CurrentCell.FireDangerScale > 3;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void SetCubeColor(Color c)
@@ -56,21 +65,48 @@ public class DebugCube : DestructibleObject
     {
         if (intensity > 5f)
         {
-            if (isFireShowing == false)
+            if (intensity>prevIntensity)
             {
-                GameObject fire = Storage.Instance.GetObject("FireAnimSquare");
-              
-                if (currentFireEffect == null)
+                GameObject fire = null;
+                prevIntensity = intensity;
+
+                if (intensity>7f)
                 {
-                    currentFireEffect = Instantiate(fire, transform.position + effectOffset, Quaternion.identity);
+                    fire = Storage.Instance.GetObject("FireAnimSquare_2");
+                }else if(intensity>9f)
+                {
+                    fire = Storage.Instance.GetObject("FireAnimSquare_3");
                 }
                 else
                 {
-                    currentFireEffect.SetActive(true);
+                    //small
+                    fire = Storage.Instance.GetObject("FireAnimSquare_1");
+                }
+
+                
+
+                if (fire != null)
+                {
+                    //remove previous fire
+                    if (currentFireEffect!=null)
+                    {
+                        Destroy(currentFireEffect);
+                        currentFireEffect = null;
+                    }
+
+                    if (currentFireEffect == null)
+                    {
+                        currentFireEffect = Instantiate(fire, transform.position + effectOffset, Quaternion.identity);
+                    }
+                    else
+                    {
+                        currentFireEffect.SetActive(true);
+                    }
                 }
 
 
                 isFireShowing = true;
+              
             }
         }
         else

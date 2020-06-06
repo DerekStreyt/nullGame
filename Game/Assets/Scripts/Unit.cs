@@ -129,6 +129,7 @@ public class Unit : Character
     {
         force = 0;
         animator.SetTrigger(dieAnimationTriggerName);
+        GameManager.Instance.Lose();
     }
 
     protected virtual Vector3 GetLookPoint()
