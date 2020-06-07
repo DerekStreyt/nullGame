@@ -18,7 +18,7 @@ public class MusicAutoPitch : MonoBehaviour
         if (source != null)
         {
             //change pitch randomly
-            float pitch =Mathf.Clamp(1f + Mathf.Sin(Time.time*0.5f)*0.3f,1f,2f);
+            float pitch =Mathf.Clamp(1f + Mathf.Sin(Time.time*0.5f)*0.2f,1f,2f);
             source.pitch = pitch;
         }
 
