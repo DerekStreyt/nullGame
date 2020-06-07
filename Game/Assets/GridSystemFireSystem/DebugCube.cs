@@ -37,6 +37,10 @@ public class DebugCube : DestructibleObject
         if(CurrentCell!=null)
         {
             result = CurrentCell.FireDangerScale > 0;
+            if (result)
+            {
+                GameManager.Instance.AddScore(CurrentCell.FireDangerScale);
+            }
             CurrentCell.FireDangerScale = 0;
         }
 

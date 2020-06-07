@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
     public Panel menu;
     public UnityPoolObjectParticle coinFx;
     public DestructibleObject fireFxPrefab;
-
+    
     public void StartGame()
     {
 
@@ -80,6 +81,14 @@ public class GameManager : MonoBehaviour
 
     public virtual void Lose()
     {
+
+        StartCoroutine(DelayLoseC());
+
+    }
+
+    protected IEnumerator DelayLoseC()
+    {
+        yield return new WaitForSeconds(2);
         message.text = "GAME OVER";
         menu.Open();
     }
