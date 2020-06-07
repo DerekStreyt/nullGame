@@ -93,6 +93,7 @@
     <Compile Include="Assets\Scripts\PoolManager\UnityPoolObjectWithTime.cs" />
     <Compile Include="Assets\Scripts\RestartScene.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
+    <Compile Include="Assets\Scripts\SoundButton.cs" />
     <Compile Include="Assets\Scripts\TestFx.cs" />
     <Compile Include="Assets\Scripts\TestWater.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
