@@ -96,6 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 100
   hp: 100
+  DebugCordIndexes: {x: 0, y: 0}
 --- !u!65 &1631722390665049109
 BoxCollider:
   m_ObjectHideFlags: 0

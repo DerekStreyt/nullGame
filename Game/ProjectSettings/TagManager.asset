@@ -7,6 +7,7 @@ TagManager:
   - Effect
   - Projectile
   - FxTemporaire
+  - FireResistant
   layers:
   - Default
   - TransparentFX

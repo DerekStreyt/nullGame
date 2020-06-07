@@ -6,6 +6,12 @@ public class ZoneAddWater : ZoneBase<Unit>
 {
     protected float timer = 0;
     protected Unit unit;
+
+    void Awake()
+    {
+       
+    }
+
     protected virtual void Update()
     {
         if (unit != null)
@@ -21,6 +27,9 @@ public class ZoneAddWater : ZoneBase<Unit>
             }
         }
     }
+
+    //check near cells
+   
 
     protected override void OnEnter(Unit unit)
     {

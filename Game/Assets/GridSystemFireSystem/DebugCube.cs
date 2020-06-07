@@ -16,6 +16,10 @@ public class DebugCube : DestructibleObject
 
     float prevIntensity = 0f;
 
+    public Vector2Int DebugCordIndexes;
+
+    bool isFireResistant = false;
+
     // Start is called before the first frame update
     protected override void Awake()
     {
@@ -23,9 +27,40 @@ public class DebugCube : DestructibleObject
         render = GetComponent<MeshRenderer>();
     }
 
+    private void Start()
+    {
+            float scale = 0.5f;
+
+            Collider[] colliders = Physics.OverlapBox(transform.position, transform.localScale * scale, transform.rotation);
+
+
+            foreach (Collider col in colliders)
+            {
+                if(col.tag=="FireResistant")
+                {
+                     SetFireResistance(true);
+                   //  Debug.Log("Setted fire resist    " + DebugCordIndexes);
+                }
+
+            }
+
+        
+    }
+
+    public void SetFireResistance(bool value)
+    {
+        isFireResistant = value;
+
+        if(CurrentCell!=null)
+        {
+            CurrentCell.IsFireResistant = true;
+        }
+    }
+
     public void SetCell(Cell c)
     {
         CurrentCell = c;
+        DebugCordIndexes = CurrentCell.PositionIndex;
     }
 
     // Update is called once per frame
@@ -51,7 +86,8 @@ public class DebugCube : DestructibleObject
     {
         if (CurrentCell != null)
         {
-            return CurrentCell.FireDangerScale > 3;
+            //only big fire damage
+            return CurrentCell.FireDangerScale > 5;
         }
         else
         {
@@ -67,24 +103,36 @@ public class DebugCube : DestructibleObject
 
     public void ShowFire(float intensity)
     {
-        if (intensity > 5f)
+        if (intensity >= 1f)
         {
             if (intensity>prevIntensity)
             {
                 GameObject fire = null;
                 prevIntensity = intensity;
 
-                if (intensity>7f)
-                {
-                    fire = Storage.Instance.GetObject("FireAnimSquare_2");
-                }else if(intensity>9f)
+                if(intensity>9f)
                 {
                     fire = Storage.Instance.GetObject("FireAnimSquare_3");
                 }
                 else
+                if (intensity > 7f)
+                {
+                    fire = Storage.Instance.GetObject("FireAnimSquare_2");
+                }
+                else
+                if (intensity > 5f)
+                {
+                    fire = Storage.Instance.GetObject("FireAnimSquare_1");
+                }
+                else
+                if (intensity > 3f)
+                {
+                    fire = Storage.Instance.GetObject("FireAnimSquare_0");
+                }
+                else
                 {
                     //small
-                    fire = Storage.Instance.GetObject("FireAnimSquare_1");
+                    fire = Storage.Instance.GetObject("FireAnimSquare_Min");
                 }
 
                 

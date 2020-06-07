@@ -14,6 +14,8 @@ public class WorldCellSystem : MonoBehaviour
 
     public static WorldCellSystem Instance;
 
+    public static Action OnGridLoaded;
+
     private Cell[,] WorldGrid = new Cell[10, 10];
     private DebugCube[,] CubesList = new DebugCube[10, 10];
 
@@ -49,6 +51,11 @@ public class WorldCellSystem : MonoBehaviour
         GenerateGrid();
         CreateDebugCubes();
         isGridInitialized = true;
+
+        if (OnGridLoaded != null)
+        {
+            OnGridLoaded.Invoke();
+        }
 
         AddFireSource(3);
     }
@@ -133,28 +140,38 @@ public class WorldCellSystem : MonoBehaviour
             lastFireIncrease = Time.time;
             foreach (Cell c in WorldGrid)
             {
-                if (c.FireDangerScale >= 3)
+                if (c.IsFireResistant == false)
                 {
-                    c.FireDangerScale += 1;
-                }
-
-                //10 Fire rating can flame near cells
-                if (c.FireDangerScale >= 10)
-                {
-                    //check neighbor cells
-                    for (int i = 0; i < 8; i++)
+                    if (c.FireDangerScale >= 3)
                     {
-                        var nearCell = GetNearCell(c, i);
-                        if (nearCell != null)
+                        c.FireDangerScale += 1;
+                    }
+
+                    //10 Fire rating can flame near cells
+                    if (c.FireDangerScale >= 10)
+                    {
+                        //check neighbor cells
+                        for (int i = 0; i < 8; i++)
                         {
-                            nearCell.FireDangerScale += 1;
+                            var nearCell = GetNearCell(c, i);
+                            if (nearCell != null)
+                            {
+                                if (nearCell.IsFireResistant == false)
+                                {
+                                    //have some chance to spread fire
+                                    if (UnityEngine.Random.value < GameConfig.Instance.fireSpreadingChance)
+                                    {
+                                        nearCell.FireDangerScale += 1;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
 
          
-            Debug.Log("Fire expanded!");
+          //  Debug.Log("Fire expanded!");
         }
     }
 
@@ -246,7 +263,11 @@ public class WorldCellSystem : MonoBehaviour
 
             var cell = GetCell(randomX, randomY);
             //start with medium fire
-            cell.FireDangerScale = 5;
+
+            if (cell.IsFireResistant == false)
+            {
+                cell.FireDangerScale = 5;
+            }
         }
 
     }
@@ -258,6 +279,7 @@ public class WorldCellSystem : MonoBehaviour
         public CellState State=CellState.Normal;
         public int FireDangerScale = 0;
         public float LastFireUpdate = 0f;
+        public bool IsFireResistant = false;
 
         public Cell(int x,int y,Vector3 worldPos)
         {
