@@ -11321,7 +11321,7 @@ PrefabInstance:
     - target: {fileID: 8644716145337547819, guid: 524ff8a7b996e3043a850e9f9113f748,
         type: 3}
       propertyPath: fireSpreadingChance
-      value: 0.65
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 8644716145490383620, guid: 524ff8a7b996e3043a850e9f9113f748,
         type: 3}
@@ -35000,7 +35000,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 789950075, guid: a3f5b64fb2b679b4f955de8b1c621832, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 20.999939
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 6428749861897415566, guid: a3f5b64fb2b679b4f955de8b1c621832,
         type: 3}

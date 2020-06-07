@@ -58,6 +58,13 @@ public class WorldCellSystem : MonoBehaviour
         }
 
         AddFireSource(3);
+
+        InvokeRepeating("AddRandomFireSource", 20f, 20f);
+    }
+
+    void AddRandomFireSource()
+    {
+        AddFireSource(1);
     }
 
     void GenerateGrid()
