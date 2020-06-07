@@ -785,7 +785,7 @@ MonoBehaviour:
   waterDecrementSpeed: 0.5
   physForce: 10
   speed: 3.5
-  damage: 1
+  damage: 5
   maxDistance: 10
   rotateSpeed: 5
   target: {x: 0, y: 0, z: 0}
