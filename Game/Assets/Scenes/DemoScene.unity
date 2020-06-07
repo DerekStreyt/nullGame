@@ -4314,8 +4314,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1862046846}
-  - {fileID: 825190591}
   - {fileID: 325299398}
+  - {fileID: 825190591}
   - {fileID: 747674522}
   - {fileID: 41877515}
   - {fileID: 1509531440}
@@ -8470,7 +8470,7 @@ PrefabInstance:
     - target: {fileID: 8644716145337547819, guid: 524ff8a7b996e3043a850e9f9113f748,
         type: 3}
       propertyPath: fireIncreaseTime
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8644716145490383620, guid: 524ff8a7b996e3043a850e9f9113f748,
         type: 3}
@@ -26795,6 +26795,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6428749861897415566, guid: a3f5b64fb2b679b4f955de8b1c621832,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6428749862010727125, guid: a3f5b64fb2b679b4f955de8b1c621832,
         type: 3}
       propertyPath: m_AnchorMax.x
