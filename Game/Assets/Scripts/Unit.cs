@@ -31,6 +31,7 @@ public class Unit : Character
 
     public LineRenderer waterRenderer;
     public Transform waterPivot;
+    public AudioSource waterSound;
     public float gravity;
 
     public float offsetTime;
@@ -135,8 +136,15 @@ public class Unit : Character
             waterRenderer.positionCount = 0;
             force = minForce;
             ApplyWaterFx(new Vector3(1000, 0, 0), Vector3.up);
+            waterSound.Pause();
             return;
         }
+
+        if (!waterSound.isPlaying)
+        {
+            waterSound.Play();
+        }
+
 
         CurrentWater -= force * waterDecrementSpeed * Time.deltaTime;
 
