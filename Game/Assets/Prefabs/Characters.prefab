@@ -72,7 +72,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 41a9c620572583845917c971a4c03415, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9e287a755fbc3974682d1c30d2178220, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.2
   m_Pitch: 1
@@ -901,7 +901,7 @@ MonoBehaviour:
   waterSound: {fileID: 7517934058777313004}
   gravity: 0.1
   offsetTime: 0.3
-  offsetRadius: 1.5
+  offsetRadius: 1
   waterMoveSpeed: 2
 --- !u!114 &564394860
 MonoBehaviour:
